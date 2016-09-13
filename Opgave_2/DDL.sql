@@ -1,22 +1,22 @@
 CREATE TABLE IF NOT EXISTS Student(
-    Student_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Student_id INT NOT NULL,
     Student_Name VARCHAR(30) UNIQUE
 
 );
 
 CREATE TABLE IF NOT EXISTS Course(
-    Course_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    Course_Name VARCHAR(30)
+    Course_id INT NOT NULL,
+    Course_Name VARCHAR(50)
 
 );
 
 CREATE TABLE IF NOT EXISTS Project(
-    Project_Name VARCHAR(30) PRIMARY KEY
+    Project_Name VARCHAR(30)
 
 );
 
 CREATE TABLE IF NOT EXISTS Exam(
-    Exam_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+    Exam_id INT NOT NULL
 
 );
 
@@ -27,11 +27,12 @@ CREATE TABLE IF NOT EXISTS HandIn(
 );
 
 CREATE TABLE IF NOT EXISTS Teacher(
-    Teacher_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    Teacher_Name VARCHAR(30) UNIQUE
-
+    Teacher_id INT NOT NULL,
+    Teacher_Name VARCHAR(30) UNIQUE,
+    PRIMARY KEY (Teacher_id)
 );
 
 CREATE TABLE IF NOT EXISTS Supervisor(
-    REFERENCES Teacher(Teacher_id, Teacher_Name)
+    Teacher_id INT NOT NULL REFERENCES Teacher(Teacher_id)
+
 );
