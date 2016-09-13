@@ -1,20 +1,12 @@
 DROP TABLE IF EXISTS Course, CoursesHasHandIns, HandIn, Project, Student, StudentDoesProject, SupervisorSupervisesProject, Teacher;
 
 CREATE Table Student(
-    Student_id INT,
+    Student_id  INT,
     Student_Name VARCHAR(30),
 
     PRIMARY KEY(Student_id)
 );
 CREATE INDEX StudentIndex ON Student(Student_id);
-
-CREATE Table Teacher(
-    Teacher_id INT,
-    Teacher_Name VARCHAR(30) UNIQUE,
-
-    PRIMARY KEY(Teacher_id)
-);
-CREATE INDEX TeacherIndex ON Teacher(Teacher_id);
 
 CREATE Table Course(
     Course_id INT,
@@ -65,6 +57,13 @@ CREATE Table Supervisor(
     FOREIGN KEY(Supervisor_id) REFERENCES Teacher(Teacher_id)
 );
 
+CREATE Table Teacher(
+    Teacher_id INT,
+    Teacher_Name VARCHAR(30) UNIQUE,
+
+    PRIMARY KEY(Teacher_id)
+);
+CREATE INDEX TeacherIndex ON Teacher(Teacher_id);
 
 /*
 Herunder findes alle relationerne vi har defineret i vores model
@@ -72,8 +71,9 @@ Herunder findes alle relationerne vi har defineret i vores model
 CREATE Table StudentDoesProject(
     Student_id INT,
     Project_Name VARCHAR(60),
-    Project_Grade VARCHAR(10),
+    Project_Grade INT,
 
+    PRIMARY KEY(Project_Name),
     FOREIGN KEY(Student_id) REFERENCES Student(Student_id),
     FOREIGN KEY(Project_Name) REFERENCES Project(Project_Name)
 );
