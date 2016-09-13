@@ -244,3 +244,12 @@ SELECT Student_id, AVG(Exam_Grade)
 SELECT Student_id, AVG(Exam_Grade), COUNT(DISTINCT avg)
     FROM Exam
     GROUP BY Student_id;
+    
+    
+    /*
+    Jacobs Bud
+    */
+
+SELECT COUNT(DISTINCT (Average)) AS NumOfAvgGrades
+    FROM (SELECT Student.Student_id, AVG(Exam_Grade) as Average
+	      FROM Student, Exam)
