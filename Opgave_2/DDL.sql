@@ -59,7 +59,7 @@ CREATE Table HandIn(
 CREATE Table Supervisor(
     Supervisor_id INT,
 
-    PRIMARY KEY (Teacher_id),
+    PRIMARY KEY (Supervisor_id),
     FOREIGN KEY(Supervisor_id) REFERENCES Teacher(Teacher_id)
 );
 
@@ -72,7 +72,6 @@ CREATE Table StudentDoesProject(
     Project_Name VARCHAR(60),
     Project_Grade VARCHAR(10),
 
-    PRIMARY KEY(Project_grade),
     FOREIGN KEY(Student_id) REFERENCES Student(Student_id),
     FOREIGN KEY(Project_Name) REFERENCES Project(Project_Name)
 );
@@ -87,10 +86,11 @@ CREATE Table TeacherTeachesCourse(
 );
 
 CREATE Table SupervisorSupervisesProject(
-    Teacher_id INT,
+    Supervisor_id INT,
     Project_Name VARCHAR(60),
 
-    FOREIGN KEY(Teacher_id) REFERENCES Teacher(Teacher_id),
+    
+    FOREIGN KEY(Supervisor_id) REFERENCES Teacher(Teacher_id),
     FOREIGN KEY(Project_Name) REFERENCES Project(Project_Name)
 );
 
