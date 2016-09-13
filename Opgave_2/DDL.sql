@@ -6,6 +6,15 @@ CREATE Table Student(
 
     PRIMARY KEY(Student_id)
 );
+CREATE INDEX StudentIndex ON Student(Student_id);
+
+CREATE Table Teacher(
+    Teacher_id INT,
+    Teacher_Name VARCHAR(30) UNIQUE,
+
+    PRIMARY KEY(Teacher_id)
+);
+CREATE INDEX TeacherIndex ON Teacher(Teacher_id);
 
 CREATE Table Course(
     Course_id INT,
@@ -15,12 +24,14 @@ CREATE Table Course(
     PRIMARY KEY(Course_id),
     FOREIGN KEY(Teacher_id) REFERENCES Teacher(Teacher_id)
 );
+CREATE INDEX CourseIndex ON Course(Course_id);
 
 CREATE Table Project(
     Project_Name VARCHAR(30),
 
     PRIMARY KEY(Project_Name)
 );
+CREATE INDEX ProjectIndex ON Project(Project_Name);
 
 CREATE Table Exam(
     Exam_id INT,
@@ -41,25 +52,15 @@ CREATE Table HandIn(
     HandIn_Name VARCHAR(30) ,
     Approved VARCHAR(3),
 
-
-    PRIMARY KEY(HandIn_Name),
-    KEY(Approved),
     FOREIGN KEY(Student_id) REFERENCES Student(Student_id),
     FOREIGN KEY(Course_id) REFERENCES Course(Course_id)
 );
 
-CREATE Table Teacher(
-    Teacher_id INT,
-    Teacher_Name VARCHAR(30) UNIQUE,
-
-    PRIMARY KEY(Teacher_id)
-);
-
 CREATE Table Supervisor(
-    Teacher_id INT,
+    Supervisor_id INT,
 
     PRIMARY KEY (Teacher_id),
-    FOREIGN KEY(Teacher_id) REFERENCES Teacher(Teacher_id)
+    FOREIGN KEY(Supervisor_id) REFERENCES Teacher(Teacher_id)
 );
 
 
@@ -73,7 +74,7 @@ CREATE Table StudentDoesProject(
 
     PRIMARY KEY(Project_grade),
     FOREIGN KEY(Student_id) REFERENCES Student(Student_id),
-    FOREIGN KEY(Project_Name) REFERENCES Project(Name)
+    FOREIGN KEY(Project_Name) REFERENCES Project(Project_Name)
 );
 
 
@@ -90,7 +91,7 @@ CREATE Table SupervisorSupervisesProject(
     Project_Name VARCHAR(60),
 
     FOREIGN KEY(Teacher_id) REFERENCES Teacher(Teacher_id),
-    FOREIGN KEY(Project_Name) REFERENCES Project(Name)
+    FOREIGN KEY(Project_Name) REFERENCES Project(Project_Name)
 );
 
 CREATE TABLE StudentAttendsCourse(
