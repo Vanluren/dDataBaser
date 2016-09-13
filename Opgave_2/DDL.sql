@@ -28,8 +28,10 @@ CREATE INDEX CourseIndex ON Course(Course_id);
 
 CREATE Table Project(
     Project_Name VARCHAR(30),
+    Supervisor_id INT,
 
-    PRIMARY KEY(Project_Name)
+    PRIMARY KEY(Project_Name),
+    FOREIGN KEY(Supervisor_id) REFERENCES Teacher(Teacher_id)
 );
 CREATE INDEX ProjectIndex ON Project(Project_Name);
 
@@ -76,23 +78,6 @@ CREATE Table StudentDoesProject(
     FOREIGN KEY(Project_Name) REFERENCES Project(Project_Name)
 );
 
-
-CREATE Table TeacherTeachesCourse(
-    Teacher_id INT,
-    Course_id INT,
-
-    FOREIGN KEY(Teacher_id) REFERENCES Teacher(Teacher_id),
-    FOREIGN KEY(Course_id) REFERENCES Course(Course_id)
-);
-
-CREATE Table SupervisorSupervisesProject(
-    Supervisor_id INT,
-    Project_Name VARCHAR(60),
-
-    
-    FOREIGN KEY(Supervisor_id) REFERENCES Teacher(Teacher_id),
-    FOREIGN KEY(Project_Name) REFERENCES Project(Project_Name)
-);
 
 CREATE TABLE StudentAttendsCourse(
     Student_id INT,
