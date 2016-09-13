@@ -6,7 +6,14 @@ SELECT Student_id
         FROM Exam
         WHERE Exam_Grade < 10
 
-
+/*
+Hvad med den her? Kan du teste på din data, Villads?
+*/
+SELECT Student_Name AS name, Student.Student_id as ID
+FROM Student, StudentDoesProject, Exam
+WHERE StudentDoesProject.Student_id = Student.Student_id
+	  AND Exam.Student_id = Student.Student_id
+	  AND (Project_Grade <= 10 OR Exam_Grade <= 10);
 
 
 
