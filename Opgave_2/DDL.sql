@@ -1,8 +1,8 @@
-DROP TABLE IF EXISTS Student, Course, Project, Exam, Teacher, Supervisor, HandIn, CoursesHasHandIns, SupervisorSupervisesProject, StudentDoesProject, TeacherTeachesCourse;
+DROP TABLE IF EXISTS Course, CoursesHasHandIns, HandIn, Project, Student, StudentDoesProject, SupervisorSupervisesProject, Teacher;
 
 CREATE Table Student(
-    id INT ,
-    Student_Name VARCHAR(30) UNIQUE,
+    id INT,
+    Student_Name VARCHAR(30),
 
     PRIMARY KEY(id)
 );
@@ -26,17 +26,19 @@ CREATE Table Exam(
     Attempts INT,
     Grade VARCHAR(3),
 
-    PRIMARY KEY(id, Grade),
+    PRIMARY KEY(id),
+    KEY(Grade),
     FOREIGN KEY(Student_id) REFERENCES Student(id)
 );
 
 CREATE Table HandIn(
     Student_id INT,
-    HandIn_Name VARCHAR(30) ,
+    Name VARCHAR(30) ,
     Approved VARCHAR(3),
 
-    PRIMARY KEY(Approved),
-    PRIMARY KEY(HandIn_Name),
+
+    PRIMARY KEY(Name),
+    KEY(Approved),
     FOREIGN KEY(Student_id) REFERENCES Student(id)
 );
 
@@ -44,13 +46,14 @@ CREATE Table Teacher(
     id INT,
     Teacher_Name VARCHAR(30) UNIQUE,
 
-    PRIMARY KEY (id)
+    PRIMARY KEY(id)
 );
 
 CREATE Table Supervisor(
     Teacher_id INT,
 
-    FOREIGN KEY (Teacher_id) REFERENCES Teacher(id)
+    PRIMARY KEY (Teacher_id),
+    FOREIGN KEY(Teacher_id) REFERENCES Teacher(id)
 );
 
 
@@ -62,8 +65,9 @@ CREATE Table StudentDoesProject(
     Project_Name VARCHAR(60),
     Project_Grade INT,
 
+    PRIMARY KEY(Project_grade),
     FOREIGN KEY(Student_id) REFERENCES Student(id),
-    FOREIGN KEY Project_Name REFERENCES Project(Name)
+    FOREIGN KEY(Project_Name) REFERENCES Project(Name)
 );
 
 
@@ -72,7 +76,7 @@ CREATE Table TeacherTeachesCourse(
     Course_id INT,
 
     FOREIGN KEY(Teacher_id) REFERENCES Teacher(id),
-    FOREIGN KEY (Course_id) REFERENCES Course(id)
+    FOREIGN KEY(Course_id) REFERENCES Course(id)
 );
 
 CREATE Table SupervisorSupervisesProject(
@@ -80,13 +84,14 @@ CREATE Table SupervisorSupervisesProject(
     Project_Name VARCHAR(60),
 
     FOREIGN KEY(Teacher_id) REFERENCES Teacher(id),
-    FOREIGN KEY (Project_Name) REFERENCES Project(Name)
+    FOREIGN KEY(Project_Name) REFERENCES Project(Name)
 );
 
 CREATE Table CoursesHasHandIns(
     Course_id INT,
     HandIn_Name VARCHAR(30),
 
-    FOREIGN KEY (Course_id) REFERENCES Course(id),
-    FOREIGN KEY (HandIn_Name) REFERENCES HandIn(Name)
+    PRIMARY KEY(HandIn_Name),
+    FOREIGN KEY(Course_id) REFERENCES Course(id),
+    FOREIGN KEY(HandIn_Name) REFERENCES HandIn(Name)
 );
