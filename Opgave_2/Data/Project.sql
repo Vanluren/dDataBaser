@@ -1,0 +1,10 @@
+insert into Project (Project_Name) values ('Networked full-range conglomeration');
+insert into Project (Project_Name) values ('Realigned empowering paradigm');
+insert into Project (Project_Name) values ('Vision-oriented client-server initiative');
+insert into Project (Project_Name) values ('Advanced actuating access');
+insert into Project (Project_Name) values ('Networked hybrid middleware');
+insert into Project (Project_Name) values ('Customizable upward-trending time-frame');
+insert into Project (Project_Name) values ('User-friendly systemic secured line');
+insert into Project (Project_Name) values ('Enterprise-wide responsive benchmark');
+insert into Project (Project_Name) values ('Cross-platform needs-based challenge');
+insert into Project (Project_Name) values ('Ergonomic full-range conglomeration');
