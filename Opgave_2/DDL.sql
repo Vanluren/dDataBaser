@@ -1,88 +1,121 @@
-DROP TABLE IF EXISTS Course, CoursesHasHandIns, HandIn, Project, Student, StudentDoesProject, SupervisorSupervisesProject, Teacher;
+/*
+Below this we implement our main and supporting entities
+*/
 
-CREATE Table Student(
-    Student_id  INT,
-    Student_Name VARCHAR(30),
+    /* This is the standard recipe for table
+    creation, we follow in the entirety of
+    our DML.sql
 
-    PRIMARY KEY(Student_id)
-);
-CREATE INDEX StudentIndex ON Student(Student_id);
+    -   First we drop the table if it exists, this
+        is done to root out any problems which might arise
+        when the <source ./"PATH"> command is called in CLI*/
 
-CREATE Table Course(
-    Course_id INT,
-    Course_Name VARCHAR(60),
-    Teacher_id INT,
+    DROP TABLE IF EXISTS Student;
 
-    PRIMARY KEY(Course_id),
-    FOREIGN KEY(Teacher_id) REFERENCES Teacher(Teacher_id)
-);
-CREATE INDEX CourseIndex ON Course(Course_id);
+    /* - We then create the table*/
+        CREATE Table Student(
 
-CREATE Table Project(
-    Project_Name VARCHAR(30),
-    Supervisor_id INT,
+            /* - Declare the attributes*/
+            Student_id  INT,
+            Student_Name VARCHAR(30),
 
-    PRIMARY KEY(Project_Name),
-    FOREIGN KEY(Supervisor_id) REFERENCES Teacher(Teacher_id)
-);
-CREATE INDEX ProjectIndex ON Project(Project_Name);
+            /* - Set the Primary Key*/
+            PRIMARY KEY(Student_id)
+        );
 
-CREATE Table Exam(
-    Exam_id INT,
-    Student_id INT,
-    Course_id INT,
-    Attempts INT,
-    Exam_Grade VARCHAR(10),
+        /*- And then we make a CREATE INDEX-statement
+            to index the newly made table, these are
+            called for better indexing in the tables
+            we rely on the most*/
+        CREATE INDEX StudentIndex ON Student(Student_id);
 
-    PRIMARY KEY(Exam_id),
-    KEY(Exam_Grade),
-    FOREIGN KEY(Student_id) REFERENCES Student(Student_id),
-    FOREIGN KEY(Course_id) REFERENCES Course(Course_id)
-);
+    DROP TABLE IF EXISTS Course;
+        CREATE Table Course(
+            Course_id INT,
+            Course_Name VARCHAR(60),
+            Teacher_id INT,
 
-CREATE Table HandIn(
-    Student_id INT,
-    Course_id INT,
-    HandIn_Name VARCHAR(30) ,
-    Approved VARCHAR(3),
+            PRIMARY KEY(Course_id),
+    /*- The FOREIGN KEY- Constraint is called
+    to make a reference to the attribute it
+    represents in another table. This is the
+    Key value inheritance we rely so heavily on! */
+            FOREIGN KEY(Teacher_id) REFERENCES Teacher(Teacher_id)
+        );
+        CREATE INDEX CourseIndex ON Course(Course_id);
 
-    FOREIGN KEY(Student_id) REFERENCES Student(Student_id),
-    FOREIGN KEY(Course_id) REFERENCES Course(Course_id)
-);
+    DROP TABLE IF EXISTS Project;
+        CREATE Table Project(
+            Project_Name VARCHAR(30),
+            Supervisor_id INT,
 
-CREATE Table Supervisor(
-    Supervisor_id INT,
+            PRIMARY KEY(Project_Name),
+            FOREIGN KEY(Supervisor_id) REFERENCES Teacher(Teacher_id)
+        );
+        CREATE INDEX ProjectIndex ON Project(Project_Name);
 
-    PRIMARY KEY (Supervisor_id),
-    FOREIGN KEY(Supervisor_id) REFERENCES Teacher(Teacher_id)
-);
+    DROP TABLE IF EXISTS Exam;
+        CREATE Table Exam(
+            Exam_id INT,
+            Student_id INT,
+            Course_id INT,
+            Attempts INT,
+            Exam_Grade VARCHAR(10),
 
-CREATE Table Teacher(
-    Teacher_id INT,
-    Teacher_Name VARCHAR(30) UNIQUE,
+            PRIMARY KEY(Exam_id),
+            KEY(Exam_Grade),
 
-    PRIMARY KEY(Teacher_id)
-);
-CREATE INDEX TeacherIndex ON Teacher(Teacher_id);
+            FOREIGN KEY(Student_id) REFERENCES Student(Student_id),
+            FOREIGN KEY(Course_id) REFERENCES Course(Course_id)
+        );
+
+    DROP TABLE IF EXISTS HandIn;
+        CREATE Table HandIn(
+            Student_id INT,
+            Course_id INT,
+            HandIn_Name VARCHAR(30) ,
+            Approved VARCHAR(3),
+
+            FOREIGN KEY(Student_id) REFERENCES Student(Student_id),
+            FOREIGN KEY(Course_id) REFERENCES Course(Course_id)
+        );
+
+    DROP TABLE IF EXISTS Supervisor;
+        CREATE Table Supervisor(
+            Supervisor_id INT,
+
+            PRIMARY KEY (Supervisor_id),
+            FOREIGN KEY(Supervisor_id) REFERENCES Teacher(Teacher_id)
+        );
+
+    DROP TABLE IF EXISTS Teacher;
+        CREATE Table Teacher(
+            Teacher_id INT,
+            Teacher_Name VARCHAR(30) UNIQUE,
+
+            PRIMARY KEY(Teacher_id)
+        );
+        CREATE INDEX TeacherIndex ON Teacher(Teacher_id);
 
 /*
-Herunder findes alle relationerne vi har defineret i vores model
+Below this is the Relationships we have decided to implement
 */
-CREATE Table StudentDoesProject(
-    Student_id INT,
-    Project_Name VARCHAR(60),
-    Project_Grade INT,
+    DROP TABLE IF EXISTS StudentDoesProject;
+        CREATE Table StudentDoesProject(
+            Student_id INT,
+            Project_Name VARCHAR(60),
+            Project_Grade INT,
 
-    PRIMARY KEY(Project_Name),
-    FOREIGN KEY(Student_id) REFERENCES Student(Student_id),
-    FOREIGN KEY(Project_Name) REFERENCES Project(Project_Name)
-);
+            PRIMARY KEY(Project_Name),
+            FOREIGN KEY(Student_id) REFERENCES Student(Student_id),
+            FOREIGN KEY(Project_Name) REFERENCES Project(Project_Name)
+        );
 
+    DROP TABLE IF EXISTS StudentAttendsCourse;
+        CREATE TABLE StudentAttendsCourse(
+            Student_id INT,
+            Course_id INT,
 
-CREATE TABLE StudentAttendsCourse(
-    Student_id INT,
-    Course_id INT,
-
-    FOREIGN KEY(Student_id) REFERENCES Student(Student_id),
-    FOREIGN KEY(Course_id) REFERENCES Course(Course_id)
-);
+            FOREIGN KEY(Student_id) REFERENCES Student(Student_id),
+            FOREIGN KEY(Course_id) REFERENCES Course(Course_id)
+        );

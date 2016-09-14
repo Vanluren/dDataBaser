@@ -72,11 +72,9 @@ SELECT Student_id, Exam_Grade
 /*
 3.2
 */
-SELECT Teacher_id, Course_id
-    FROM Course
-    INNER JOIN c1.Teacher_id,c2.Course_id;
-
-
+SELECT Teacher_Id, Course_Id
+    FROM TeacherTeachesCourse ttc1, TeacherTeachesCourse ttc2
+    WHERE ttc1.Course_Id = ttc2.Cource_Id;
 
 
 +------------+-----------+
@@ -115,7 +113,8 @@ SELECT Teacher_id, Course_id
 |       9393 |    201631 |
 |       9393 |    201643 |
 |       9393 |    201657 |
-+------------+-----------+
++------------+------------+
+
 /*
 3.3
 */
