@@ -1,6 +1,5 @@
 # dDataBaser
 
-
 ##Opgave 2
 Indeholder følgende:
 
@@ -11,5 +10,13 @@ Indeholder følgende:
 * "Data Definition Language"-fil
 
 * "Data Manipulation Language"-fil
+-------------------------------------------------------
 
+##Opgave 3
+Indeholder følgende:
+
+    * PDF med svar på spørgsmålene
+
+
+______________________________________________________________________
 ##### Repoet opdateres for hver gang vi får en ny opgave.
