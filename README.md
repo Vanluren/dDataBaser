@@ -15,8 +15,7 @@ Indeholder følgende:
 ##Opgave 3
 Indeholder følgende:
 
+    * Opgave beskrivelse
     * PDF med svar på spørgsmålene
-
-
 ______________________________________________________________________
 ##### Repoet opdateres for hver gang vi får en ny opgave.
