@@ -1,0 +1,5 @@
+CREATE INDEX partOfPersonName ON Person(personName(10));
+
+CREATE INDEX partOfSerialNumber ON Vehicles(serialNumber(10));
+
+CREATE INDEX partOfAddress ON Places(address(10));

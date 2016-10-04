@@ -1,0 +1,41 @@
+EXPLAIN SELECT Person.personName, Vehicles.serialNumber, Places.address
+    FROM Person
+        INNER JOIN Vehicles ON Vehicles.serialNumber =  Person.personName
+        INNER JOIN Places ON Places.address = Person.personName;
+
+
+EXPLAIN SELECT Person.personName, Vehicles.serialNumber, Places.address
+	FROM Person
+	INNER JOIN Vehicles
+	INNER JOIN Places
+		ON Person.personId = Vehicles.vehicleId
+		AND SUBSTRING(Person.personName, 1, 3) ='9ge'
+		AND SUBSTRING(Places.address, 1, 3) ='9ge';
+
+EXPLAIN SELECT Person.personName, Vehicles.serialNumber, Places.address
+        FROM Person
+        INNER JOIN Vehicles
+        INNER JOIN Places
+    WHERE SUBSTRING(Person.personName, 1, 3) ='9ge' AND SUBSTRING(Places.address, 1, 3) ='9ge' OR SUBSTRING(Vehicles.serialNumber,1,3)='9ge';
+
+////////////////////
+
+EXPLAIN SELECT Person.personName, Vehicles.serialNumber, Place.address
+    FROM Person
+        INNER JOIN Vehicles ON Vehicles.serialNumber =  Person.personName
+        INNER JOIN Place ON Place.address = Person.personName;
+
+
+EXPLAIN SELECT Person.personName, Vehicles.serialNumber, Place.address
+	FROM Person
+	INNER JOIN Vehicles
+	INNER JOIN Place
+		ON Person.personId = Vehicles.vehicleId
+		AND SUBSTRING(Person.personName, 1, 3) ='9ge'
+		AND SUBSTRING(Place.address, 1, 3) ='9ge';
+
+EXPLAIN SELECT Person.personName, Vehicles.serialNumber, Place.address
+        FROM Person
+        INNER JOIN Vehicles
+        INNER JOIN Place
+    WHERE SUBSTRING(Person.personName, 1, 3) ='9ge' AND SUBSTRING(Place.address, 1, 3) ='9ge' OR SUBSTRING(Vehicles.serialNumber,1,3)='9ge';
